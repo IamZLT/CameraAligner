@@ -3,6 +3,12 @@
 A camera alignment system based on Flask and OpenCV, designed for real-time camera view alignment with preset masks. It supports ArUco marker detection and camera calibration.
 ![System Interface](assert/images/flask.jpg)
 
+
+## Process
+The core of ArUco marker pose estimation is to transform position information from the camera coordinate system to the marker coordinate system. First, the rotation vector (rvec) is converted to a rotation matrix (R) using the cv2.Rodrigues function, then its transpose (R_inv) is calculated to obtain the rotation transformation matrix from the camera coordinate system to the marker coordinate system. Next, this rotation matrix is multiplied with the translation vector (tvec) and negated to obtain the actual position of the marker in the camera coordinate system (tvec_inv). Based on this position information, we can further calculate the distance (Euclidean distance) and angle (through the arctangent of x and z coordinates) from the marker to the camera, with all distance measurements in meters.
+![System Interface](assert/images/process.jpg)
+
+
 ## Features
 
 ### 1. Camera Alignment
