@@ -6,8 +6,20 @@ A camera alignment system based on Flask and OpenCV, designed for real-time came
 
 ## Process
 The core of ArUco marker pose estimation is to transform position information from the camera coordinate system to the marker coordinate system. First, the rotation vector (rvec) is converted to a rotation matrix (R) using the cv2.Rodrigues function, then its transpose (R_inv) is calculated to obtain the rotation transformation matrix from the camera coordinate system to the marker coordinate system. Next, this rotation matrix is multiplied with the translation vector (tvec) and negated to obtain the actual position of the marker in the camera coordinate system (tvec_inv). Based on this position information, we can further calculate the distance (Euclidean distance) and angle (through the arctangent of x and z coordinates) from the marker to the camera, with all distance measurements in meters.
-![System Interface](assert/images/process.jpg)
 
+
+<center>  
+
+```mermaid  
+graph TD  
+    A["Input: rvec, tvec"] --> B["Convert rvec to R|cv2.Rodrigues"]  
+    B --> C["R_inv = R^T"]  
+    C --> D["tvec_inv = -R_inv * tvec"]  
+    D --> E["Position and Measurements"]  
+    E --> F["Distance"]  
+    E --> G["Angle"]  
+```  
+</center> 
 
 ## Features
 
