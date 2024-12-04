@@ -29,11 +29,11 @@ class ArucoDictionary(Enum):
     Dict_APRILTAG_36h11 = aruco.DICT_APRILTAG_36h11
     Dict_ArUco_ORIGINAL = aruco.DICT_ARUCO_ORIGINAL
 
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
-# 设置视频流的分辨率为 1280x720
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+# # 设置视频流的分辨率为 1280x720
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 DICTIONARY = ArucoDictionary.Dict_4X4_50
 markerIds = 0
@@ -51,9 +51,9 @@ def estimate_pose(frame, mtx, dist):
     marker_corners, marker_ids, rejected_candidates = detector.detectMarkers(gray)
 
     # 输出结果
-    print("Detected marker IDs:", marker_ids)
-    print("Marker corners:", marker_corners)
-    print("Rejected candidates:", rejected_candidates)
+    # print("Detected marker IDs:", marker_ids)
+    # print("Marker corners:", marker_corners)
+    # print("Rejected candidates:", rejected_candidates)
 
     # 检测图像中的ArUco标记
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -110,27 +110,27 @@ def estimate_pose(frame, mtx, dist):
     return frame  # 返回处理后的图像
 
 
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
-    mtx = np.array([
-        [711.77689507, 0, 672.53236606],
-        [0, 711.78573804, 313.37884074],
-        [0, 0, 1],
-    ])
-    dist = np.array( [1.26638295e-01, -1.16132908e-01, -2.24690373e-05, -2.25867957e-03, -6.76164003e-02] )
-    # 调用estimate_pose函数对当前帧进行姿态估计和标记检测
-    frame = estimate_pose(frame, mtx, dist)
-    new_width = 1280
-    new_height = 720
-    frame = cv2.resize(frame, (new_width, new_height))
-    cv2.imshow('frame', frame)
+# while True:
+#     ret, frame = cap.read()
+#     if not ret:
+#         break
+#     mtx = np.array([
+#         [711.77689507, 0, 672.53236606],
+#         [0, 711.78573804, 313.37884074],
+#         [0, 0, 1],
+#     ])
+#     dist = np.array( [1.26638295e-01, -1.16132908e-01, -2.24690373e-05, -2.25867957e-03, -6.76164003e-02] )
+#     # 调用estimate_pose函数对当前帧进行姿态估计和标记检测
+#     frame = estimate_pose(frame, mtx, dist)
+#     new_width = 1280
+#     new_height = 720
+#     frame = cv2.resize(frame, (new_width, new_height))
+#     cv2.imshow('frame', frame)
 
-    # 等待按键输入，如果按下键盘上的'q'键则退出循环
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+#     # 等待按键输入，如果按下键盘上的'q'键则退出循环
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
-# 释放VideoCapture对象
-cap.release()
-cv2.destroyAllWindows()
+# # 释放VideoCapture对象
+# cap.release()
+# cv2.destroyAllWindows()

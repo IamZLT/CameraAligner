@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify, Response
 import cv2
+import numpy as np
+from camera.camera_position import estimate_pose
 
 app = Flask(__name__)
 
@@ -8,6 +10,15 @@ aligning = False  # 改为对齐状态
 capture_device = None
 camera_initialized = False
 current_camera_index = 0
+
+
+mtx = np.array([
+    [711.77689507, 0, 672.53236606],
+    [0, 711.78573804, 313.37884074],
+    [0, 0, 1],
+])
+dist = np.array( [1.26638295e-01, -1.16132908e-01, -2.24690373e-05, -2.25867957e-03, -6.76164003e-02] )
+
 
 def initialize_camera():
     """初始化摄像头"""
@@ -35,8 +46,10 @@ def video_stream():
             if not success:
                 break
             else:
-                mirrored_frame = cv2.flip(frame, 1)
+                # mirrored_frame = cv2.flip(frame, 1)
+                mirrored_frame = estimate_pose(frame, mtx, dist)
                 resized_frame = cv2.resize(mirrored_frame, (1920, 1080))
+                
                 _, buffer = cv2.imencode('.jpg', resized_frame)
                 frame = buffer.tobytes()
                 yield (b'--frame\r\n'

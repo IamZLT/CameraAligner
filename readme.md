@@ -1,89 +1,90 @@
-# Camera Alignment System (相机对齐系统)
+# Camera Alignment System
 
-这是一个基于 Flask 和 OpenCV 的相机对齐系统，主要用于实时相机画面与预设蒙版的对齐，并支持 ArUco 标记检测和相机标定功能。
+A camera alignment system based on Flask and OpenCV, designed for real-time camera view alignment with preset masks. It supports ArUco marker detection and camera calibration.
+![System Interface](assert/images/flask.jpg)
 
-## 功能特点
+## Features
 
-### 1. 相机对齐功能
-- 实时视频流显示
-- 多视角切换支持
-- 可调节蒙版透明度
-- 蒙版开关控制
-- 实时对齐状态显示
+### 1. Camera Alignment
+- Real-time video stream display
+- Multiple camera view support
+- Adjustable mask opacity
+- Mask toggle control
+- Real-time alignment status
 
-### 2. ArUco 标记检测
-- 支持多种 ArUco 字典类型
-- 实时位姿估计
-- 距离和角度计算
-- 坐标轴可视化
+### 2. ArUco Marker Detection
+- Multiple ArUco dictionary support
+- Real-time pose estimation
+- Distance and angle calculation
+- Coordinate axis visualization
 
-### 3. 相机标定
-- 支持 Charuco 板标定
-- 自动保存标定参数
-- 支持多图片批量标定
-- 标定参数的 YAML 格式存储
+### 3. Camera Calibration
+- Charuco board calibration support
+- Automatic parameter saving
+- Multi-image batch calibration
+- YAML format parameter storage
 
-## 技术栈
+## Tech Stack
 
-- **后端**：
+- **Backend**:
   - Flask
   - OpenCV (cv2)
   - NumPy
   - Awkward Array
   
-- **前端**：
+- **Frontend**:
   - HTML5
   - CSS3
   - Layui
   - JavaScript
 
-## 项目结构
+## Image Examples
 
-## 示例图片说明
-
-### ArUco 标记示例
-位于 `assert/images/` 目录：
+### ArUco Markers
+Located in `assert/images/` directory:
 
 1. **ArUco_full.png**
-   ![ArUco标记](assert/images/ArUco_full.png)
-   - 完整的 ArUco 标记板示例
-   - 用于相机标定和位姿估计
-   - 包含多个 4x4 ArUco 码
+   ![ArUco Board](assert/images/ArUco_full.png)
+   - Complete ArUco marker board example
+   - Used for camera calibration and pose estimation
+   - Contains multiple 4x4 ArUco codes
 
 2. **ArUco_single.png**
-   ![ArUco标记](assert/images/ArUco_single.png)
-   - 单个 ArUco 标记示例
-   - 用于基本的位置检测和跟踪
-   - 展示了标准 4x4 ArUco 码格式
+   ![Single ArUco](assert/images/ArUco_single.png)
+   - Single ArUco marker example
+   - Used for basic position detection and tracking
+   - Shows standard 4x4 ArUco code format
 
-### 标定和检测结果
-位于 `output/` 目录：
+### Calibration and Detection Results
+Located in `output/` directory:
 
 1. **01_output.jpg**
-   - 相机标定过程的可视化结果
-   - 显示检测到的 Charuco 角点
-   - 包含坐标轴的叠加显示
-   - 用于验证标定和检测的准确性
+   - Camera calibration process visualization
+   - Shows detected Charuco corners
+   - Includes overlaid coordinate axes
+   - Used to verify calibration and detection accuracy
 
 2. **calibration.yaml**
-   - 存储相机标定参数
-   - 包含相机矩阵和畸变系数
-   - 用于后续的位姿估计
+   - Stores camera calibration parameters
+   - Contains camera matrix and distortion coefficients
+   - Used for subsequent pose estimation
 
-### 使用示例
+### Usage Examples
 
-1. **标定过程，获取相机内参**
-   ![标定结果](output/01_output.jpg)
-   - 绿色点：检测到的 Charuco 角点
-   - 红色轴：X 轴
-   - 绿色轴：Y 轴
-   - 蓝色轴：Z 轴
+1. **Calibration Process - Getting Camera Intrinsics**
+   ![Calibration Result](output/01_output.jpg)
+   - Green points: Detected Charuco corners
+   - Red axis: X-axis
+   - Green axis: Y-axis
+   - Blue axis: Z-axis
 
-2. **ArUco 标记，获得相机外参**
-   ![ArUco标记](output/position.jpg)
-   - 标准 4x4 ArUco 码示例
-   - 用于实时位置跟踪
+2. **ArUco Marker - Getting Camera Extrinsics**
+   ![ArUco Detection](output/position.jpg)
+   - Standard 4x4 ArUco code example
+   - Used for real-time position tracking
 
 
-## 参考
-https://docs.opencv.org/4.x/d2/d64/tutorial_table_of_content_objdetect.html
+
+## References
+
+openCV Object Detection Documentation
